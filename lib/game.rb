@@ -10,8 +10,6 @@ class Game
   def initialize
     @winner = -1
     @players = []
-    @total_moves = 0
-
     @board = Board.new
 
     setup_players
@@ -23,7 +21,7 @@ class Game
 
   private
 
-  attr_accessor :total_moves, :players, :winner
+  attr_accessor :players, :winner
 
   def play
     turn = players.index('X')
@@ -35,7 +33,6 @@ class Game
       valid = false
       valid = @board.play(ask_for_position(players[turn]), players[turn]) until valid
 
-      @total_moves += 1
       @winner = @board.check_winner
 
       turn = (turn + 1) % TOTAL_PLAYERS
