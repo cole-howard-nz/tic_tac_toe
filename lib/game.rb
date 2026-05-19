@@ -16,6 +16,9 @@ class Game
 
     setup_players
     play
+
+    puts "\n#{ winner } has won the game!\n\n"
+    @board.show
   end
 
   private
@@ -33,6 +36,8 @@ class Game
       valid = @board.play(ask_for_position(players[turn]), players[turn]) until valid
 
       @total_moves += 1
+      @winner = @board.check_winner
+
       turn = (turn + 1) % TOTAL_PLAYERS
     end
   end
@@ -40,7 +45,7 @@ class Game
   def ask_for_position(marker)
     position = ''
     width = @board.width
-    until position.match(/^[1-#{ width }][,:][1-#{ width }]$/)
+    until position.match(/^[1-#{ width }],[1-#{ width }]$/)
       print "Marker #{ marker } enter a comma seperated position: "
       position = gets.chomp
     end
