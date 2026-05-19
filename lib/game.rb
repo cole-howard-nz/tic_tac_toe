@@ -32,6 +32,7 @@ class Game
       valid = false
       valid = @board.play(ask_for_position(players[turn]), players[turn]) until valid
 
+      @total_moves += 1
       turn = (turn + 1) % TOTAL_PLAYERS
     end
   end
